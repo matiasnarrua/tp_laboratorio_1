@@ -1,0 +1,281 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void initEmployees(Employee vec[], int len )
+{
+    for(int i=0; i<tam; i++)
+    {
+        vec[i].isEmpty = 1;
+
+    }
+}
+
+int addEmployees (int idx,Employee vec[], int len)
+{
+    int todoOk = 0;
+    int indice = buscarLibres(vec, len);
+    Employee auxEmpleado;
+
+    system("cls");
+    printf("***** Alta Empleado *****\n\n");
+    if (  indice == -1 )
+    {
+
+        printf("Sistema Completo\n\n");
+    }
+    else
+    {
+
+        auxEmpleado.id = idx;
+
+        printf("ingrese Nombre: ");
+        fflush(stdin);
+        gets(auxEmpleado.nombre);
+
+        printf("ingrese sexo: ");
+        fflush(stdin);
+        scanf("%c", &auxEmpleado.sexo);
+
+        printf("ingrese edad: ");
+        scanf("%d", &auxEmpleado.edad);
+
+        printf("ingrese sueldo: ");
+        scanf("%f",&auxEmpleado.sueldo);
+
+        printf("ingrese fecha de ingreso dd/mm/aaaa: ");
+        scanf("%d/%d/%d", &auxEmpleado.fechaIngreso.dia, &auxEmpleado.fechaIngreso.mes,&auxEmpleado.fechaIngreso.anio );
+
+        printf("Ingrese Sector: ");
+        scanf("%d",&auxEmpleado.sector);
+
+        auxEmpleado.isEmpty = 0;
+
+        vec[indice] = auxEmpleado;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+int findEmployeesById (int id,Employee vec[],int len )
+{
+    int indice = -1;
+    for(int i=0; i<len; i++)
+    {
+        if(vec[i].id == id && vec[i].isEmpty == 0)
+        {
+            indice = i;
+            break;
+        }
+    }
+    return indice;
+}
+
+void removeEmployee (Employee vec[], int len )
+{
+    int id ;
+    int indice;
+    char confirma;
+    system("cls");
+    printf("*****Baja Empleado *****\n\n");
+    printf("Ingrese id: ");
+    scanf("%d", &id);
+    indice = findEmployeesById(id, vec, tam);
+
+    if(indice == -1)
+    {
+
+        printf("No hay registro del empleado con el Id: %d\n",id);
+    }
+    else
+    {
+        mostarEmpleado(vec[indice]);
+        printf("Confirma baja[S/N] ?");
+        fflush(stdin);
+        scanf("%c", &confirma);
+
+        if(confirma == 's')
+        {
+            vec[indice].isEmpty = 1;
+            printf("Se ha realizado la baja con exito \n\n");
+        }
+        else
+        {
+            printf("Se ha cancelado la operacion\n\n");
+        }
+    }
+}
+
+void sortEmployees(Employee vec[], int len )
+{
+    eEmpleado auxEmpleado;
+    for(int i=0; i<tam-1; i++)
+    {
+        for(int j= i+1; j<tam; j++)
+        {
+            if( vec[i].sexo > vec[j].sexo )
+            {
+
+                auxEmpleado=vec[i];
+                vec[i]=vec[j];
+                vec[j] = auxEmpleado;
+            }
+            else if (vec[i].sexo == vec[j].sexo && vec[i].sueldo < vec[j].sueldo)
+            {
+                auxEmpleado=vec[i];
+                vec[i]=vec[j];
+                vec[j] = auxEmpleado;
+            }
+        }
+    }
+}
+
+void printEmployees(Employee vec[], int len, eSector sectores[], int tamsec)
+{
+    int flag = 0;
+    printf("*****Listado Empleados*****\n\n");
+    printf("Id     Nombre       Sexo   Edad   Sueldo   FechaIngreso      Sector\n");
+
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].isEmpty == 0)
+        {
+            printEmployee(vec [i],sectores,tamsec);
+            flag = 1;
+        }
+    }
+    if(flag ==0)
+    {
+        printf("****No hay empleados que mostrar****\n\n");
+    }
+}
+void printEmployee(Employee emp, eSector sectores[],int tamsec)
+{
+    char descripcion[20];
+
+    cargarDescripcionSector(descripcion, emp.idSector,sectores, tamsec);
+    printf("%5d   %10s     %c   %2d   %.2f   %02d/%02d/%d    %10s\n", emp.id, emp.nombre, emp.sexo, emp.edad, emp.sueldo, emp.fechaIngreso.dia, emp.fechaIngreso.mes, emp.fechaIngreso.anio, descripcion);
+
+}
+
+int buscarLibres (Employee vec[],int tam )
+{
+    int indice = -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].isEmpty==1)
+        {
+            indice = i;
+            break;
+        }
+    }
+    return indice;
+}
+
+void hardcodearEmpleados(Employee vec[],int cant)
+{
+
+
+    void modificarEmpleado(eEmpleado vec[], int tam, eSector sectores[], int tamsec )
+    {
+        int id ;
+        int indice;
+        char confirma;
+        int opcion;
+        float nuevoSueldo;
+        char nuevoNombre [20];
+        char nuevoApellido[20];
+        int nuevoSector;
+
+        system("cls");
+        printf("***** Modificar Empleado *****\n\n");
+        printf("Ingrese id: ");
+        scanf("%d", &id);
+        indice = buscarEmpleado(id, vec, tam);
+
+        if(indice == -1)
+        {
+            printf("No hay registro del empleado con el Id: %d\n",id);
+        }
+        else
+        {
+            printEmployee(vec[indice],sectores, tamsec);
+
+            printf("Modificar este empleado[S/N] ?");
+            fflush(stdin);
+            scanf("%c", &confirma);
+
+            if(confirma == 's')
+            {
+                printf("Modificar:\n1_Nombre\n2_Apellido\n3_Salario\n4_Sector\n5_Salir\n\nSeleccione una opcion: ");
+                scanf("%d", &opcion);
+                switch(menu())
+                {
+
+                case 1:
+                    printf("ingrese nuevo Nombre: ");
+                    scanf("%f", &nuevoSueldo);
+
+                    vec[indice].salary = nuevoNombre;
+                    printf("Se ha actualizado con exito \n\n");
+
+                    break;
+
+                case 2:
+                    printf("ingrese nuevo Apellido: ");
+                    scanf("%f", &nuevoSueldo);
+
+                    vec[indice].salary = nuevoApellido;
+                    printf("Se ha actualizado con exito \n\n");
+
+                    break;
+
+                case 3:
+
+                    printf("ingrese nuevo sueldo: ");
+                    scanf("%f", &nuevoSueldo);
+
+                    vec[indice].salary = nuevoSueldo;
+                    printf("Se ha actualizado con exito \n\n");
+                    break;
+
+                case 4:
+                    printf("ingrese nuevo sector: ");
+                    scanf("%d", &nuevoSector);
+
+                    vec[indice].sector = nuevoSector;
+                    printf("Se ha actualizado con exito \n\n");
+                    break;
+
+                case 5:
+                    printf("Confirma salir ?");
+                    fflush(stdin);
+                    scanf("%c", &confirma);
+                    if (confirma == 's')
+                    {
+                        seguir = 'n';
+                    }
+                    break;
+
+                }
+                else
+                {
+                    printf("Se ha cancelado la operacion\n\n");
+                }
+            }
+        }
+
+        for(int i =0; i< cant; i++)
+        {
+
+            vec[i].id =ids[i];
+            strcpy( vec[i].nombre, nombres [i]);
+            vec[i].sexo = sexos [i];
+            vec[i].edad = edades[i];
+            vec[i].sueldo = sueldos[i];
+            vec[i].fechaIngreso.dia = dias[i];
+            vec[i].fechaIngreso.mes = meses[i];
+            vec[i].fechaIngreso.anio = anios[i];
+            vec[i].sector = idsSector[i];
+            vec[i].isEmpty = 0;
+        }
+    }

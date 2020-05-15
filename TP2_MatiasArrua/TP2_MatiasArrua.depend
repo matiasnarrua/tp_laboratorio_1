@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1589406360 source:c:\users\mati\desktop\mati\facu\2do año\programacion 1\tp2_matiasarrua\tp2_matiasarrua\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayEmployees.h"
+
+1589406343 c:\users\mati\desktop\mati\facu\2do año\programacion 1\tp2_matiasarrua\tp2_matiasarrua\arrayemployees.h
+
+1589403476 c:\users\mati\desktop\mati\facu\2do año\programacion 1\tp2_matiasarrua\tp2_matiasarrua\hardcodear.h
+
+1589406327 source:c:\users\mati\desktop\mati\facu\2do año\programacion 1\tp2_matiasarrua\tp2_matiasarrua\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayEmployees.h"
+	"hardcodear.h"
+
