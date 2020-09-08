@@ -14,13 +14,14 @@ int main()
     int flagSeguir = 1;
     int flag1 = 0;
     int flag2 = 0;
+    int flag3 = 0;
+    char continuar;
     float suma;
     float resta;
     float divicion;
     float multiplicacion;
     float factorizacion1;
     float factorizacion2;
-
 
     do
     {
@@ -51,6 +52,7 @@ int main()
             break;
 
         case 3:
+            system("cls");
             if(flag1==1 && flag2==1)
             {
                 suma = sumar(num1, num2);
@@ -73,6 +75,7 @@ int main()
                     divicion= dividir(num1, num2);
                 }
                 printf("Ya se han calculado todos los resultados.\nPor favor elija la siguiente opcion\n\n");
+                flag3 = 1;
             }
             else
             {
@@ -91,47 +94,67 @@ int main()
 
             break;
         case 4:
-            printf("La suma de %.2f + %.2f es: %.2f\n", num1, num2, suma);
-            printf("La resta de %.2f - %.2f es: %.2f\n", num1, num2, resta);
-            printf("La multiplicacion de %.2f * %.2f es: %.2f\n", num1, num2, multiplicacion);
-
-            if (num1<= 0)
+            system("cls");
+            if(flag3 == 1)
             {
-                printf(" No se puede hacer el factorial de %.2f ya que es un numero negativo o cero \n", num1);
+                printf("La suma de %.2f + %.2f es: %.2f\n", num1, num2, suma);
+                printf("La resta de %.2f - %.2f es: %.2f\n", num1, num2, resta);
+                printf("La multiplicacion de %.2f * %.2f es: %.2f\n", num1, num2, multiplicacion);
+
+                if (num1<= 0)
+                {
+                    printf(" No se puede hacer el factorial de %.2f ya que es un numero negativo o cero \n", num1);
+                }
+                else
+                {
+                    printf("El factorial de %.2f es: %.2f\n", num1,factorizacion1);
+                }
+                if (num2<= 0)
+                {
+                    printf(" No se puede hacer el factorial de %.2f ya que es un numero negativo o cero \n", num2);
+                }
+                else
+                {
+                    printf("El factorial de %.2f es: %.2f\n", num2,factorizacion2);
+                }
+
+                if (num2 == 0)
+                {
+                    printf("No se puede dividir por 0\n\n");
+                }
+                else
+                {
+                    printf("La divicion de %.2f / %.2f es: %.2f\n\n", num1, num2, divicion);
+                }
             }
             else
             {
-                printf("El factorial de %.2f es: %.2f\n", num1,factorizacion1);
+                printf("Debe realizar los calculos antes de ver los resultados\n\n");
             }
-            if (num2<= 0)
-            {
-                printf(" No se puede hacer el factorial de %.2f ya que es un numero negativo o cero \n", num2);
-            }
-            else
-            {
-                printf("El factorial de %.2f es: %.2f\n", num2,factorizacion2);
-            }
-
-            if (num2 == 0)
-            {
-                printf("No se puede dividir por 0\n\n");
-            }
-            else
-            {
-                printf("La divicion de %.2f / %.2f es: %.2f\n\n", num1, num2, divicion);
-            }
-
             break;
 
         case 5 :
-            flagSeguir = 0;
+            printf("Confirma que quiere salir? (s/n):  ");
+            fflush(stdin);
+            scanf("%c", &continuar);
+            if(continuar == 'n')
+            {
+                flagSeguir = 1;
+            }
+            else if (continuar == 's')
+            {
+                flagSeguir = 0;
+            }
+            else
+            {
+                printf("ingrese una opcion correcta");
+            }
+            system("cls");
             break;
         default :
             printf("Elija una opcion correcta del menu\n\n");
             break;
-
         }
-
     }
     while (flagSeguir == 1);
 
