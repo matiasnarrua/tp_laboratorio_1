@@ -30,7 +30,6 @@ int addEmployees (int idx,Employee vec[], int len)
     }
     else
     {
-
         auxEmpleado.id = idx;
         printf("ingrese Nombre: ");
         fflush(stdin);
@@ -142,7 +141,6 @@ void sortEmployees(Employee vec[], int len, int order)
         }
     }
 }
-
 void printEmployees(Employee vec[], int len)
 {
     int flag = 0;
@@ -167,7 +165,6 @@ void printEmployee(Employee emp)
      printf("%5d   %15s     %15s      %.2f     %d\n", emp.id, emp.lastName , emp.name, emp.salary,emp.sector);
 
 }
-
 int buscarLibres (Employee vec[],int tam )
 {
     int indice = -1;
