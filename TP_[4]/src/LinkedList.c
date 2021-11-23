@@ -600,49 +600,41 @@ LinkedList* ll_clone(LinkedList* this)
  */
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
-	 int returnAux = -1;
-	    int order_validate;
-	    void* pElementOne;
-	    void* pElementTwo;
-	    void* pAuxElement;
+    int returnAux =-1;
+    int i;
+    int j;
+    void* aux;
 
-
-	    if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
-	    {
-	        for(int i=0; i<ll_len(this)-1; i++)
-	        {
-	            pElementOne = ll_get(this, i);
-	            for(int j=i+1; j<ll_len(this); j++)
-	            {
-	                pElementTwo = ll_get(this, j);
-
-	                if(order == 1)
-	                {
-	                    order_validate = pFunc(pElementOne, pElementTwo);
-	                    if(order_validate == 1)
-	                    {
-	                        pAuxElement = pElementOne;
-	                        pElementOne = pElementTwo;
-	                        pElementTwo = pAuxElement;
-	                    }
-	                }
-	                else if(order == 0)
-	                {
-	                    order_validate = pFunc(pElementOne, pElementTwo);
-	                    if(order_validate == -1)
-	                    {
-	                        pAuxElement = pElementTwo;
-	                        pElementTwo = pElementOne;
-	                        pElementOne = pAuxElement;
-	                    }
-	                }
-	                ll_set(this, i, pElementOne);
-	                ll_set(this, j, pElementTwo);
-	            }
-	        }
-	        returnAux = 0;
-	    }
-	    return returnAux;
+    if(this!=NULL && pFunc!=NULL && order>=0 && order<=1)
+    {
+    	for(i=0;i<ll_len(this)-1;i++)
+    	{
+    		for(j=i+1;j<ll_len(this);j++)
+    		{
+    			if(order==1)
+    			{
+    				if(pFunc(ll_get(this, i), ll_get(this, j))>0)
+    				{
+    					aux=ll_get(this, i);
+    					ll_set(this, i, ll_get(this, j));
+    					ll_set(this, j, aux);
+    					returnAux=0;
+    				}
+    			}
+    			else if(order==0)
+    			{
+    				if(pFunc(ll_get(this, i), ll_get(this, j))<0)
+    				{
+    					aux=ll_get(this, j);
+    					ll_set(this, j, ll_get(this, i));
+    					ll_set(this, i, aux);
+    					returnAux=0;
+    				}
+    			}
+    		}
+    	}
+    }
+    return returnAux;
 
 }
 

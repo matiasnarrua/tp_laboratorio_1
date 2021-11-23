@@ -223,11 +223,12 @@ int compareByName(void *pElement1, void *pElement2) {
 	char nombre_Uno[50];
 	char nombre_Dos[50];
 
-	Employee *empleado_Uno = (Employee*) pElement1;
-	Employee *empleado_Dos = (Employee*) pElement2;
+	//Employee *empleado_Uno = (Employee*) pElement1;
+	//Employee *empleado_Dos = (Employee*) pElement2;
 
-	employee_getNombre(empleado_Uno, nombre_Uno);
-	employee_getNombre(empleado_Dos, nombre_Dos);
+	employee_getNombre((Employee*)pElement1, nombre_Uno);
+	employee_getNombre((Employee*)pElement2, nombre_Dos);
+
 
 	retorno = strcmp(nombre_Uno, nombre_Dos);
 

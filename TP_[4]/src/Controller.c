@@ -289,20 +289,14 @@ int controller_sortEmployee(LinkedList *pArrayListEmployee)
 					switch (menuOrden()) {
 					case 1:
 						orden =
-								getDosEstados(
-										"Ingrese 1 si desea ordenar de forma ascendente o 0 si desea ordenar de forma descendente: ",
-										1, 0);
-						retorno = ll_sort(pArrayListEmployee, compareById,
-								orden);
+								getDosEstados("Ingrese 1 si desea ordenar de forma ascendente o 0 si desea ordenar de forma descendente: ",	1, 0);
+						retorno = ll_sort(pArrayListEmployee, compareById,orden);
 						option_continue = 's';
 						printf("\n");
 						system("pause");
 						break;
 					case 2:
-						orden =
-								getDosEstados(
-										"Ingrese 1 si desea ordenar de forma ascendente o 0 si desea ordenar de forma descendente: ",
-										1, 0);
+						orden =	getDosEstados("Ingrese 1 si desea ordenar de forma ascendente o 0 si desea ordenar de forma descendente: ",1, 0);
 						retorno = ll_sort(pArrayListEmployee, compareByName,
 								orden);
 						option_continue = 's';
